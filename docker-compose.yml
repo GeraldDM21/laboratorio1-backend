@@ -17,6 +17,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
+    networks:
+      - proyecto3-network
 
   app:
     build: .
@@ -31,6 +34,12 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/proyecto3
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - proyecto3-network
 
 volumes:
   mysql_data:
+
+networks:
+  proyecto3-network:
+    driver: bridge
