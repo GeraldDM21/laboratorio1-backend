@@ -1,0 +1,171 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-06-16",
+  "__export_source": "insomnia.desktop.app",
+  "resources": [
+    {
+      "_id": "wrk_001",
+      "_type": "workspace",
+      "name": "Laboratorio 1 - CRUD Backend"
+    },
+    {
+      "_id": "env_001",
+      "_type": "environment",
+      "parentId": "wrk_001",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "token": ""
+      }
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_001",
+      "name": "Auth"
+    },
+    {
+      "_id": "req_login_admin",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login SUPER_ADMIN",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"super.admin@gmail.com\",\n  \"password\": \"superadmin123\"\n}"
+      }
+    },
+    {
+      "_id": "req_login_user",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login USER",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"user@gmail.com\",\n  \"password\": \"user1234\"\n}"
+      }
+    },
+    {
+      "_id": "fld_cat",
+      "_type": "request_group",
+      "parentId": "wrk_001",
+      "name": "Categorias"
+    },
+    {
+      "_id": "req_cat_list",
+      "_type": "request",
+      "parentId": "fld_cat",
+      "name": "Listar Categorias",
+      "method": "GET",
+      "url": "{{ _.base_url }}/categorias?page=1&size=10",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }],
+      "body": {}
+    },
+    {
+      "_id": "req_cat_create",
+      "_type": "request",
+      "parentId": "fld_cat",
+      "name": "Registrar Categoria",
+      "method": "POST",
+      "url": "{{ _.base_url }}/categorias",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Electronica\",\n  \"descripcion\": \"Productos electronicos\"\n}"
+      }
+    },
+    {
+      "_id": "req_cat_update",
+      "_type": "request",
+      "parentId": "fld_cat",
+      "name": "Actualizar Categoria",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/categorias/1",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Electronica y Tecnologia\",\n  \"descripcion\": \"Gadgets y tecnologia\"\n}"
+      }
+    },
+    {
+      "_id": "req_cat_delete",
+      "_type": "request",
+      "parentId": "fld_cat",
+      "name": "Borrar Categoria",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/categorias/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }],
+      "body": {}
+    },
+    {
+      "_id": "fld_prod",
+      "_type": "request_group",
+      "parentId": "wrk_001",
+      "name": "Productos"
+    },
+    {
+      "_id": "req_prod_list",
+      "_type": "request",
+      "parentId": "fld_prod",
+      "name": "Listar Productos",
+      "method": "GET",
+      "url": "{{ _.base_url }}/productos?page=1&size=10",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }],
+      "body": {}
+    },
+    {
+      "_id": "req_prod_create",
+      "_type": "request",
+      "parentId": "fld_prod",
+      "name": "Registrar Producto",
+      "method": "POST",
+      "url": "{{ _.base_url }}/productos",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Laptop Dell XPS\",\n  \"descripcion\": \"Laptop de alto rendimiento\",\n  \"precio\": 1299.99,\n  \"cantidadStock\": 15,\n  \"categoria\": { \"id\": 1 }\n}"
+      }
+    },
+    {
+      "_id": "req_prod_update",
+      "_type": "request",
+      "parentId": "fld_prod",
+      "name": "Actualizar Producto",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/productos/1",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Laptop Dell XPS 15\",\n  \"descripcion\": \"Laptop actualizada\",\n  \"precio\": 1399.99,\n  \"cantidadStock\": 10,\n  \"categoria\": { \"id\": 1 }\n}"
+      }
+    },
+    {
+      "_id": "req_prod_delete",
+      "_type": "request",
+      "parentId": "fld_prod",
+      "name": "Borrar Producto",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/productos/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }],
+      "body": {}
+    }
+  ]
+}
